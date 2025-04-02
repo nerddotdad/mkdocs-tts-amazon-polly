@@ -68,7 +68,10 @@ class AmazonPollyTTSPlugin(BasePlugin):
                 return markdown
 
         # Create audio tag
-        audio_tag = f'<audio controls><source src="/{self.config["output_dir"]}/{audio_filename}" type="audio/mpeg"></audio>\n\n'
+        # Ensure the audio tag reflects the correct versioned URL if using Mike for versioned deployment
+        site_url = config.get("site_url", "")  # Get the base site URL (including version path if Mike is used)
+        versioned_audio_url = f"{site_url}/{self.config['output_dir']}/{audio_filename}"
+        audio_tag = f'<audio controls><source src="{versioned_audio_url}" type="audio/mpeg"></audio>\n\n'
 
         # Log the markdown before modification
         logger.debug(f"[amazon-polly-tts] Original markdown: {markdown[:500]}")  # Log first 500 chars for preview
@@ -96,12 +99,6 @@ class AmazonPollyTTSPlugin(BasePlugin):
             else:
                 markdown = audio_tag + markdown
 
-        # Adjust audio file path for versioned documentation
-        version = config.get("version", "")  # Get the version from the config
-        if version:
-            # If version exists, prepend the versioned path to the audio file path
-            audio_tag = f'<audio controls><source src="/{version}/{self.config["output_dir"]}/{audio_filename}" type="audio/mpeg"></audio>\n\n'
-        
         # Log the modified markdown
         logger.debug(f"[amazon-polly-tts] Modified markdown: {markdown[:500]}")  # Log first 500 chars for preview
 
