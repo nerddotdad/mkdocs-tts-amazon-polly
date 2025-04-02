@@ -1,1 +1,1 @@
-from ..plugin import AmazonPollyTTSPlugin
+from .plugin import AmazonPollyTTSPlugin

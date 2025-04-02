@@ -9,9 +9,9 @@ setup(
         "boto3",
     ],
     entry_points={
-        "mkdocs.plugins": [
-            "tts-amazon-polly = mkdocs_tts_amazon_polly.plugin:AmazonPollyTTSPlugin",
-        ]
+        'mkdocs.plugins': [
+            'amazon-polly-tts = mkdocs_amazon_polly.plugin:AmazonPollyTTSPlugin',
+        ],
     },
     include_package_data=True,
     description="An MkDocs plugin to generate TTS audio using Amazon Polly",
