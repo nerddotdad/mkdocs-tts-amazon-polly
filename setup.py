@@ -1,16 +1,18 @@
 from setuptools import setup, find_packages
 
+from setuptools import setup, find_packages
+
 setup(
-    name="mkdocs-tts-amazon-polly",
-    version="0.1.0",
+    name='mkdocs-tts-amazon-polly',
+    version='0.1',
     packages=find_packages(),
     install_requires=[
-        "mkdocs>=1.0",
-        "boto3",
+        'mkdocs>=1.0',
+        'boto3>=1.18',
     ],
     entry_points={
         'mkdocs.plugins': [
-            'amazon-polly-tts = mkdocs_amazon_polly.plugin:AmazonPollyTTSPlugin',
+            'tts-amazon-polly = mkdocs_tts_amazon_polly.plugin:AmazonPollyTTSPlugin',
         ],
     },
     include_package_data=True,
